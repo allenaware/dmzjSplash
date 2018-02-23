@@ -8,7 +8,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,6 +85,7 @@ public class DmSplash extends RelativeLayout implements BayesAdspot, SplashADLis
     }
 
     public void adFailed(String result) {
+        //call gdt
         fetchSplashAD((Activity) appContext, adContainer, skipView, Constants.APPID, Constants.SplashPosID, this, 0);
     }
 
@@ -141,8 +141,8 @@ public class DmSplash extends RelativeLayout implements BayesAdspot, SplashADLis
     }
 
     public void loadAd() {
-//        fetchSplashAD((Activity) appContext,adContainer,skipView,Constants.APPID,Constants.SplashPosID,this,0);
-        bs.loadAd();
+        fetchSplashAD((Activity) appContext,adContainer,skipView,Constants.APPID,Constants.SplashPosID,this,0);
+//        bs.loadAd();
 
     }
 
@@ -248,7 +248,6 @@ public class DmSplash extends RelativeLayout implements BayesAdspot, SplashADLis
 
     @Override
     public void onADPresent() {
-        Log.i("AD_DEMO", "SplashADPresent");
         // splashHolder.setVisibility(View.INVISIBLE); // 广告展示后一定要把预设的开屏图片隐藏起来
         if(bl!=null)
         {
@@ -259,7 +258,6 @@ public class DmSplash extends RelativeLayout implements BayesAdspot, SplashADLis
 
     @Override
     public void onADClicked() {
-        Log.i("AD_DEMO", "SplashADClicked");
         if(bl!=null)
         {
             bl.onAdClick();
@@ -273,22 +271,19 @@ public class DmSplash extends RelativeLayout implements BayesAdspot, SplashADLis
      */
     @Override
     public void onADTick(long millisUntilFinished) {
-        Log.i("AD_DEMO", "SplashADTick " + millisUntilFinished + "ms");
         skipView.setText(String.format(SKIP_TEXT, Math.round(millisUntilFinished / 1000f)));
     }
 
     @Override
     public void onADDismissed() {
-        Log.i("AD_DEMO", "SplashADDismissed");
-        closeAd();
+        if(bl!=null)
+        {
+            bl.onAdClose();
+        }
     }
 
     @Override
     public void onNoAD(AdError error) {
-        Log.i(
-                "AD_DEMO",
-                String.format("LoadSplashADFail, eCode=%d, errorMsg=%s", error.getErrorCode(),
-                        error.getErrorMsg()));
         if (bl != null) {
             bl.onAdFailed();
         }

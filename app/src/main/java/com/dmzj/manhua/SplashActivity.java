@@ -97,7 +97,7 @@ public class SplashActivity extends Activity implements SplashADListener {
                 public void onAdFailed() {
 
                     System.out.println("get Ad Failed");
-//                getHome();
+                getHome();
                 }
                 @Override
                 public void onAdReportOk(int type) {
@@ -116,7 +116,7 @@ public class SplashActivity extends Activity implements SplashADListener {
                 public  void  onAdClose()
                 {
                     System.out.println("get Ad close");
-                    getHome();
+                    next();
                 }
 
             });
