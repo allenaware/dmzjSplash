@@ -11,11 +11,19 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:text="首页" />
+
+        <RelativeLayout
+            android:id="@+id/dm_ad_banner_container"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true">
+
+        </RelativeLayout>
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

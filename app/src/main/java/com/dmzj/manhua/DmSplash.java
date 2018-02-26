@@ -20,6 +20,10 @@ import com.bayescom.sdk.BayesSplashListener;
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
 import com.qq.e.comm.util.AdError;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Timer;
@@ -141,8 +145,8 @@ public class DmSplash extends RelativeLayout implements BayesAdspot, SplashADLis
     }
 
     public void loadAd() {
-        fetchSplashAD((Activity) appContext,adContainer,skipView,Constants.APPID,Constants.SplashPosID,this,0);
-//        bs.loadAd();
+//        fetchSplashAD((Activity) appContext,adContainer,skipView,Constants.APPID,Constants.SplashPosID,this,0);
+        bs.loadAd();
 
     }
 
@@ -249,6 +253,7 @@ public class DmSplash extends RelativeLayout implements BayesAdspot, SplashADLis
     @Override
     public void onADPresent() {
         // splashHolder.setVisibility(View.INVISIBLE); // 广告展示后一定要把预设的开屏图片隐藏起来
+        reportToUrl(Constants.SplashShowTrackUrl);
         if(bl!=null)
         {
             bl.onAdShow();
@@ -258,6 +263,7 @@ public class DmSplash extends RelativeLayout implements BayesAdspot, SplashADLis
 
     @Override
     public void onADClicked() {
+        reportToUrl(Constants.SplashClickTrackUrl);
         if(bl!=null)
         {
             bl.onAdClick();
@@ -292,6 +298,26 @@ public class DmSplash extends RelativeLayout implements BayesAdspot, SplashADLis
     private void fetchSplashAD(Activity activity, ViewGroup adContainer, View skipContainer,
                                String appId, String posId, SplashADListener adListener, int fetchDelay) {
         splashAD = new SplashAD(activity, adContainer, skipContainer, appId, posId, adListener, fetchDelay);
+    }
+    private void reportToUrl(final String trackUrl) {
+        new Thread() {
+            public void run() {
+                    try {
+                        URL url = new URL(trackUrl);
+                        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                        urlConnection.connect();
+                        if (200 == urlConnection.getResponseCode()) {
+
+                        } else {
+                            //nothing
+                        }
+                    } catch (Exception e) {
+
+                    }
+
+                }
+        }.start();
+
     }
 }
 
