@@ -21,6 +21,8 @@ import com.qq.e.ads.banner.AbstractBannerADListener;
 import com.qq.e.ads.banner.BannerView;
 import com.qq.e.comm.util.AdError;
 
+import org.json.JSONObject;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Enumeration;
@@ -209,7 +211,7 @@ public class DmBanner extends RelativeLayout implements BayesAdspot {
             @Override
             public void onADExposure()
             {
-                reportToUrl(Constants.BannerShowTrackUrl);
+                bs.reportToUrl(Constants.DmShowTrackUrl);
                 if(bl!=null)
                 {
                     bl.onAdShow();
@@ -219,7 +221,7 @@ public class DmBanner extends RelativeLayout implements BayesAdspot {
             @Override
             public void onADClicked()
             {
-                reportToUrl(Constants.BannerClickTrackUrl);
+                bs.reportToUrl(Constants.DmClickTrackUrl);
                 if(bl!=null)
                 {
                     bl.onAdClick();
@@ -236,25 +238,6 @@ public class DmBanner extends RelativeLayout implements BayesAdspot {
 //        System.out.println("DETATACHED!!");
 
     }
-    private void reportToUrl(final String trackUrl) {
-        new Thread() {
-            public void run() {
-                try {
-                    URL url = new URL(trackUrl);
-                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                    urlConnection.connect();
-                    if (200 == urlConnection.getResponseCode()) {
 
-                    } else {
-                        //nothing
-                    }
-                } catch (Exception e) {
-
-                }
-
-            }
-        }.start();
-
-    }
 
 }

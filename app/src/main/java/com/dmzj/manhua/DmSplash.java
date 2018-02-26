@@ -21,6 +21,8 @@ import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
 import com.qq.e.comm.util.AdError;
 
+import org.json.JSONObject;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -253,7 +255,7 @@ public class DmSplash extends RelativeLayout implements BayesAdspot, SplashADLis
     @Override
     public void onADPresent() {
         // splashHolder.setVisibility(View.INVISIBLE); // 广告展示后一定要把预设的开屏图片隐藏起来
-        reportToUrl(Constants.SplashShowTrackUrl);
+        bs.reportToUrl(Constants.DmShowTrackUrl);
         if(bl!=null)
         {
             bl.onAdShow();
@@ -263,7 +265,7 @@ public class DmSplash extends RelativeLayout implements BayesAdspot, SplashADLis
 
     @Override
     public void onADClicked() {
-        reportToUrl(Constants.SplashClickTrackUrl);
+        bs.reportToUrl(Constants.DmClickTrackUrl);
         if(bl!=null)
         {
             bl.onAdClick();
@@ -299,25 +301,6 @@ public class DmSplash extends RelativeLayout implements BayesAdspot, SplashADLis
                                String appId, String posId, SplashADListener adListener, int fetchDelay) {
         splashAD = new SplashAD(activity, adContainer, skipContainer, appId, posId, adListener, fetchDelay);
     }
-    private void reportToUrl(final String trackUrl) {
-        new Thread() {
-            public void run() {
-                    try {
-                        URL url = new URL(trackUrl);
-                        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                        urlConnection.connect();
-                        if (200 == urlConnection.getResponseCode()) {
 
-                        } else {
-                            //nothing
-                        }
-                    } catch (Exception e) {
-
-                    }
-
-                }
-        }.start();
-
-    }
 }
 
