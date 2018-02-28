@@ -26,6 +26,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    implementation files('libs/GDTUnionSDK.4.13.556.min.jar')
-    implementation files('libs/bayessdk.jar')
+    implementation files('libs/bayes.jar')
 }

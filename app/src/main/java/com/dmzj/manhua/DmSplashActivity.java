@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.bayescom.sdk.BayesSdkConfig;
 import com.bayescom.sdk.BayesSplashListener;
+import com.bayescom.sdk.DmSplash;
 
 import java.util.ArrayList;
 import java.util.List;

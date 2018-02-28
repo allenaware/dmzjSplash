@@ -6,6 +6,7 @@ import android.widget.RelativeLayout;
 
 import com.bayescom.sdk.BayesBannerListener;
 import com.bayescom.sdk.BayesSdkConfig;
+import com.bayescom.sdk.DmBanner;
 
 
 public class MainActivity extends AppCompatActivity {
